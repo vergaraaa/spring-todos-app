@@ -8,8 +8,7 @@
 <body>
     <div>
         Welcome to the welcome page <br>
-        Name: ${name} <br>
-        Password: ${password}
+        Name: ${username} <br>
     </div>
 </body>
 </html>

@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("username")
@@ -38,12 +41,15 @@ public class TodoController {
     }
 
     @RequestMapping(value = "add-todo", method = RequestMethod.POST)
-    public String addNewTodo(ModelMap model, Todo todo) {
-        String username = (String) model.get("username");
+    public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+        if (result.hasErrors()) {
+            return "todo";
+        } else {
+            String username = (String) model.get("username");
+            todoService.addTodo(username, todo.getDescription(), LocalDate.now(), false);
 
-        todoService.addTodo(username, todo.getDescription(), LocalDate.now(), false);
-
-        return "redirect:list-todos";
+            return "redirect:list-todos";
+        }
     }
 
 }

@@ -17,10 +17,15 @@
 
         <form:form method="post" modelAttribute="todo">
             Description <form:input type="text" name="description" required="required" path="description" />
+            <input type="submit" value="Submit" class="btn btn-success" />
 
+            
+            <!-- hidden attributes for model todo -->
             <form:input type="hidden" path="id" />
             <form:input type="hidden" path="done" />
-            <input type="submit" value="Submit" class="btn btn-success" />
+
+            <!-- errors -->
+            <form:errors path="description" cssClass="text-warning"></form:errors>
         </form:form>
     </div>
 

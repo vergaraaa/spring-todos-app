@@ -60,4 +60,13 @@ public class TodoController {
         return "redirect:list-todos";
     }
 
+    @RequestMapping("update-todo")
+    public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+        Todo todoEdit = todoService.findById(id);
+
+        model.put("todo", todoEdit);
+
+        return "todo";
+    }
+
 }
